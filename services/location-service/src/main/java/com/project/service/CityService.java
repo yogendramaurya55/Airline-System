@@ -3,7 +3,8 @@ package com.project.service;
 import com.project.payload.request.CityRequest;
 import com.project.payload.response.CityResponse;
 import org.springframework.data.domain.Page;
-import java.awt.print.Pageable;
+import org.springframework.data.domain.Pageable;
+
 
 public interface CityService {
 
@@ -11,12 +12,11 @@ public interface CityService {
     CityResponse getCityById(Long id) throws Exception;
 
     CityResponse updateCityById(Long id , CityRequest request) throws Exception;
-    void deleteCityById(Long id);
+    void deleteCityById(Long id) throws Exception;
     Page<CityResponse> getAllCities(Pageable pageable);
 
     Page<CityResponse> searchCities(String keyword , Pageable pageable);
     Page<CityResponse> getCityByCountryCode(String countryCode , Pageable pageable);
 
-    boolean cityExist(String cityName);
-    boolean validateCityCode(String cityCode);
+    boolean cityExist(String cityCode);
 }

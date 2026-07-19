@@ -1,0 +1,21 @@
+server:
+  port: 5001
+
+app:
+  jwt:
+    secret: 9W8c2XKQm1jZ3lQx7FvP0yRr6YkL4bTnH2sD5uE8aCg=
+    expiration-ms: 86400000
+
+
+spring:
+  application:
+    name: user-service
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/airline_user_db
+    username: root
+    password: Karan@1709
+
+  jpa:
+    hibernate:
+      ddl-auto: update

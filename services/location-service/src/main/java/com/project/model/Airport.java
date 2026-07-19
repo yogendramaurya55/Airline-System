@@ -1,0 +1,54 @@
+package com.project.model;
+
+import com.project.embeddable.Address;
+import com.project.embeddable.GeoCode;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import net.minidev.json.annotate.JsonIgnore;
+
+import java.time.ZoneId;
+import java.util.Locale;
+
+@Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class Airport {
+
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    private Long id;
+
+    @Column(unique = true , nullable = false , length = 3)
+    private String iataCode;
+
+    @Column(nullable = false)
+    private String name;
+
+    @Embedded
+    private Address address;
+
+    @Embedded
+    private GeoCode geoCode;
+
+    @Column(name = "time_zone_id" , length = 50)
+    private ZoneId timeZone;
+
+    @ManyToOne
+    @JsonIgnore
+    private City city;
+
+    @JsonIgnore
+    @Transient
+    public String getDetailedName(){
+        if(city != null && city.getCountryCode() != null){
+            return name.toUpperCase()+"/"+city.getCityCode();
+        }
+
+        return name.toUpperCase();
+    }
+}
